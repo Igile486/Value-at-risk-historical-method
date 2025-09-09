@@ -1,0 +1,42 @@
+import numpy as np
+
+Ask_value_t0=input('what are the value at t0 you invested in ? seperate them by comas')
+values_t0=[]
+
+for i in Ask_value_t0.split(','):
+    values_t0.append(float(i))
+print('the values you invested at t0 are :',values_t0)
+
+Stock_value_t0=input('what are the stocks value at t0 you invested in ? seperate them by comas')
+stocks_values_t0=[]
+for i in Stock_value_t0.split(','):
+    stocks_values_t0.append(float(i))
+print('the stocks values at t0 are :',stocks_values_t0)
+
+if len(stocks_values_t0) != len(values_t0):
+    raise SystemExit("Erreur : le nombre d’actions et de montants investis ne correspond pas.")
+
+
+Portfolio_value=sum(values_t0)
+weight=[]
+for i in range(len(stocks_values_t0)):
+    weight.append(values_t0[i]/Portfolio_value)
+
+print(weight)
+
+
+Number_shares= [values_t0[i]/stocks_values_t0[i ]for i in range(len(values_t0))]
+print(Number_shares)
+
+ask__stock_values_t1=input("what are the stock values at t1? seperate them by comas")
+stock_values_t1=[float(i) for i in ask__stock_values_t1.split(',')]
+print('the stocks values at t1 are :',stock_values_t1)
+
+if len(stock_values_t1) != len(values_t0):
+    raise SystemExit("Erreur : le nombre d’actions et de montants investis ne correspond pas.")
+
+return_t1=[((stock_values_t1[i]/stocks_values_t0[i])-1) for i in range(len(stock_values_t1))]
+print("the return per stock is:", return_t1)
+
+values_t1=[Number_shares[i]*stock_values_t1[i] for i in range(len(stock_values_t1))]
+print("the values at t=1 of the portfolio are:", values_t1)
